@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.6.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.1" />
+    <PackageReference Include="MediatR" Version="8.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SenacSp.ProjetoIntegrador.Data\SenacSp.ProjetoIntegrador.Data.csproj" />
+    <ProjectReference Include="..\SenacSp.ProjetoIntegrador.Domain\SenacSp.ProjetoIntegrador.Domain.csproj" />
+    <ProjectReference Include="..\SenacSp.ProjetoIntegrador.Infra\SenacSp.ProjetoIntegrador.Infra.csproj" />
+    <ProjectReference Include="..\SenacSp.ProjetoIntegrador.Logging\SenacSp.ProjetoIntegrador.Logging.csproj" />
+    <ProjectReference Include="..\SenacSp.ProjetoIntegrador.Shared\SenacSp.ProjetoIntegrador.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

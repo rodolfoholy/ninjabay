@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.6.1" />
+    <PackageReference Include="MediatR" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+    <Folder Include="QueryHandler\" />
+    <Folder Include="Queries\" />
+    <Folder Include="Projections\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SenacSp.ProjetoIntegrador.Shared\SenacSp.ProjetoIntegrador.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
