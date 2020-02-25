@@ -44,6 +44,7 @@ namespace SenacSp.ProjetoIntegrador.Web
                 .AppAddCompression()
                 .AppAddAuthentication(Configuration, Env)
                 .AppAddDatabase(Configuration)
+                .AppAddApiDocs()
                 .AppAddIoCServices(Configuration)
                 .AppAddMediator();
                 //.AppAddSpa()
@@ -85,6 +86,7 @@ namespace SenacSp.ProjetoIntegrador.Web
             app.UseRouting();
             app.UseCors(CorsPolicy);
             app.UseAuthorization();
+            app.AppUseApiDocs();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             app.AppUseMigrations(Configuration, env);
             //app.AppUseSpa(env);
