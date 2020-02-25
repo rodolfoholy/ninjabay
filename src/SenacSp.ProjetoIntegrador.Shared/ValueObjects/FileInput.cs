@@ -8,8 +8,6 @@ namespace SenacSp.ProjetoIntegrador.Shared.ValueObjects
     {
         public byte[] Buffer { get; set; }
 
-        public string Name { get; set; }
-
         public bool HasValue() => Buffer?.Length > 0;
     }
 }

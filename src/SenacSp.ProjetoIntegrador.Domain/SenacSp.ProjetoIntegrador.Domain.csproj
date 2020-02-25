@@ -10,9 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
     <Folder Include="QueryHandler\" />
-    <Folder Include="Queries\" />
     <Folder Include="Projections\" />
   </ItemGroup>
 
