@@ -92,7 +92,7 @@ namespace SenacSp.ProjetoIntegrador.Web
             //app.AppUseSpa(env);
 
 
-            //AppLoggerFactory.GetLogger().Info("Appliction starts");
+            AppLoggerFactory.GetLogger().Info("Appliction starts");
         }
     }
 }
