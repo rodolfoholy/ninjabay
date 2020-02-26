@@ -18,6 +18,6 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         {
         }
         [HttpGet]
-        public IActionResult Get() => Ok("teste123");
+        public IActionResult Get() => Ok("teste12345");
     }
 }
