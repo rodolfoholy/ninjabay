@@ -14,7 +14,7 @@ namespace SenacSp.ProjetoIntegrador.Data
 
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(basePath)
-                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.Development.json")
                 .Build();
 
             var builder = new DbContextOptionsBuilder<ECommerceDataContext>();

@@ -18,8 +18,13 @@ namespace SenacSp.ProjetoIntegrador.Web
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureAppConfiguration((hostingContext, builder)
+                        =>
+                    {
+                        builder.AddUserSecrets<Startup>();
+                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }

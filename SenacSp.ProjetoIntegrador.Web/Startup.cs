@@ -43,19 +43,19 @@ namespace SenacSp.ProjetoIntegrador.Web
                 })
                 .AppAddCompression()
                 .AppAddAuthentication(Configuration, Env)
+                .AppAddIoCServices(Configuration)
                 .AppAddDatabase(Configuration)
                 .AppAddApiDocs()
-                .AppAddIoCServices(Configuration)
                 .AppAddMediator();
                 //.AppAddSpa()
 
             if (Env.IsProduction())
             {
-                services.AddHttpsRedirection(options =>
-                {
-                    options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
-                    options.HttpsPort = 443;
-                });
+                //services.AddHttpsRedirection(options =>
+                //{
+                //    options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
+                //    options.HttpsPort = 443;
+                //});
             }
         }
 
@@ -65,9 +65,9 @@ namespace SenacSp.ProjetoIntegrador.Web
         {
             if (env.IsProduction())
             {
-                app.UseHttpsRedirection();
+                //app.UseHttpsRedirection();
                 app.UseExceptionHandler("/Error");
-                app.UseHsts();
+                //app.UseHsts();
             }
             else
             {
@@ -80,16 +80,15 @@ namespace SenacSp.ProjetoIntegrador.Web
             //app.UseResponseCompression();
 
 
-            //app.AppUseHealthChecks();
             app.ConfigureExceptionHandler();
             app.UseAuthentication();
             app.UseRouting();
             app.UseCors(CorsPolicy);
             app.UseAuthorization();
-            app.AppUseApiDocs();
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-            app.AppUseMigrations(Configuration, env);
             //app.AppUseSpa(env);
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.AppUseApiDocs();
+            app.AppUseMigrations(Configuration, env);
 
 
             AppLoggerFactory.GetLogger().Info("Appliction starts");

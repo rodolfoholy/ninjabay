@@ -26,7 +26,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Config.Bootstrap
             }).AddJwtBearer(x =>
             {
                 x.TokenValidationParameters = jwtTokenConfig.TokenValidationParameters;
-                x.RequireHttpsMetadata = !env.IsDevelopment();
+                //x.RequireHttpsMetadata = !env.IsDevelopment();
             });
 
             return services;
