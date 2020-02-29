@@ -47,16 +47,15 @@ namespace SenacSp.ProjetoIntegrador.Web
                 .AppAddDatabase(Configuration)
                 .AppAddApiDocs()
                 .AppAddMediator();
-                //.AppAddSpa()
 
-            if (Env.IsProduction())
-            {
-                //services.AddHttpsRedirection(options =>
-                //{
-                //    options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
-                //    options.HttpsPort = 443;
-                //});
-            }
+            //if (Env.IsProduction())
+            //{
+            //    //services.AddHttpsRedirection(options =>
+            //    //{
+            //    //    options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
+            //    //    options.HttpsPort = 443;
+            //    //});
+            //}
         }
 
         public void Configure(IApplicationBuilder app,
@@ -66,7 +65,7 @@ namespace SenacSp.ProjetoIntegrador.Web
             if (env.IsProduction())
             {
                 //app.UseHttpsRedirection();
-                app.UseExceptionHandler("/Error");
+                //app.UseExceptionHandler("/Error");
                 //app.UseHsts();
             }
             else
@@ -77,7 +76,7 @@ namespace SenacSp.ProjetoIntegrador.Web
 
 
             app.UseStaticFiles();
-            //app.UseResponseCompression();
+            app.UseResponseCompression();
 
 
             app.ConfigureExceptionHandler();
@@ -85,13 +84,15 @@ namespace SenacSp.ProjetoIntegrador.Web
             app.UseRouting();
             app.UseCors(CorsPolicy);
             app.UseAuthorization();
-            //app.AppUseSpa(env);
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             app.AppUseApiDocs();
             app.AppUseMigrations(Configuration, env);
 
 
-            AppLoggerFactory.GetLogger().Info("Appliction starts");
+            if (env.IsProduction())
+            {
+                AppLoggerFactory.GetLogger().Info("Build Realizado com sucesso");
+            }
         }
     }
 }
