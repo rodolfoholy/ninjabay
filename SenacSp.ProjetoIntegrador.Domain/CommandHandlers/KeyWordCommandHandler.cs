@@ -29,7 +29,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
 
             if (await _keyWordRepository.AnyAsync(x => x.Word.ToLower().Equals(command.Word.ToLower())))
             {
-                Notifications.Handle("Palava Chave já utilizada");
+                Notifications.Handle("Palava Chave já Cadastrada");
                 return null;
             }
             await _keyWordRepository.AddAsync(KeyWord.New(command.Word));
