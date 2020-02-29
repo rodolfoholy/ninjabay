@@ -10,6 +10,6 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
 
         public int Word { get; set; }
 
-        public ICollection<ProductKeyWord> KeyWords { get; set; } = new List<ProductKeyWord>();
+        public ICollection<ProductKeyWord> Products { get; set; } = new List<ProductKeyWord>();
     }
 }

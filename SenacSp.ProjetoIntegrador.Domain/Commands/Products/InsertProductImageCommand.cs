@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Newtonsoft.Json;
 using SenacSp.ProjetoIntegrador.Domain.Results;
 using SenacSp.ProjetoIntegrador.Shared.ValueObjects;
 using System;
@@ -9,6 +10,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.Commands.Products
 {
     public class InsertProductImageCommand : IRequest<DefaultResult>
     {
+        [JsonIgnore]
         public Guid ProductId { get; set; }
 
         public IEnumerable<FileInput> Files { get; set; } = new List<FileInput>();

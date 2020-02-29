@@ -7,8 +7,9 @@ namespace SenacSp.ProjetoIntegrador.Domain.Filters
 {
     public class ProductFilter : Pagination
     {
-        public string Search { get; set; }
+        public string Name { get; set; }
 
+        public Guid? KeyWordId { get; set; }
         public decimal? MinValue { get; set; }
 
         public decimal? MaxValue { get; set; }

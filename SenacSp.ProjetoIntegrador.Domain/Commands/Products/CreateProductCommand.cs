@@ -10,7 +10,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.Commands.Products
     {
         public string Name { get;  set; }
         public int? Quantity { get; set; }
-        public IEnumerable<string> KeyWords { get; set; } = new List<string>();
+        public IEnumerable<Guid> KeyWords { get; set; } = new List<Guid>();
         public decimal? Price { get;  set; }
         public string Description { get; set; }
     }
