@@ -32,14 +32,14 @@ namespace SenacSp.ProjetoIntegrador.Web
             services
                 .AppAddMvc()
                 .AddCors(options =>
+
                 {
                     options.AddPolicy(CorsPolicy,
                         builder =>
-                            builder.AllowAnyOrigin()
-                                .AllowAnyMethod()
-                                .AllowAnyHeader()
-                                .AllowAnyOrigin()
-                                );
+                            builder
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader());
                 })
                 .AppAddCompression()
                 .AppAddAuthentication(Configuration, Env)
