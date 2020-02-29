@@ -39,7 +39,7 @@ namespace SenacSp.ProjetoIntegrador.Web
                                 .AllowAnyMethod()
                                 .AllowAnyHeader()
                                 .AllowAnyOrigin()
-                                .AllowCredentials());
+                                );
                 })
                 .AppAddCompression()
                 .AppAddAuthentication(Configuration, Env)
