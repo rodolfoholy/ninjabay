@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SenacSp.ProjetoIntegrador.Domain.Queries.KeyWord
 {
-    public class GetKeyWordQuery : IRequest<KeyWordVm>
+    public class GetKeyWordQuery : IRequest<List<KeyWordVm>>
     {
     }
 }

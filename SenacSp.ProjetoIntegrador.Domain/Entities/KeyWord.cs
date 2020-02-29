@@ -8,8 +8,14 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
     {
         public Guid Id { get; set; }
 
-        public int Word { get; set; }
+        public string Word { get; set; }
 
         public ICollection<ProductKeyWord> Products { get; set; } = new List<ProductKeyWord>();
+
+        public static KeyWord New(string word) => new KeyWord
+        {
+            Id = Guid.NewGuid(),
+            Word = word
+        };
     }
 }
