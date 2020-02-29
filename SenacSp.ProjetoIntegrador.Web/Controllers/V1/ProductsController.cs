@@ -48,14 +48,31 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.UnprocessableEntity)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
-        #endregion 
+        #endregion  
 
         [HttpPatch("images/{id:guid}")]
-        public async Task<IActionResult> SaveProductImages([FromBody] InsertProductImageCommand command, Guid id)
+        public async Task<IActionResult> SaveProductImages(Guid id, [FromBody] InsertProductImageCommand command)
         {
             command.ProductId = id;
             return CreateResponse(await _mediator.Send(command, CancellationToken.None));
         }
+
+        #region SwaggerDoc
+        [ProducesResponseType(typeof(EnvelopDataResult<DefaultResult>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.UnprocessableEntity)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
+        #endregion 
+
+        [HttpPatch("questions-answers/{idProduct:guid}")]
+        public async Task<IActionResult> SaveProductQuestionAndAnswers(Guid idProduct,AddQuestionsAndAnswerProductCommand command)
+        {
+            command.Id = idProduct;
+            return CreateResponse(await _mediator.Send(command, CancellationToken.None));
+        }
+
 
         #region SwaggerDoc
         [ProducesResponseType(typeof(EnvelopDataResult<CreateProductResult>), (int)HttpStatusCode.OK)]
@@ -67,7 +84,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         #endregion 
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductCommand command, Guid id)
+        public async Task<IActionResult> UpdateProduct(Guid id,[FromBody] UpdateProductCommand command)
         {
             command.Id = id;
             return CreateResponse(await _mediator.Send(command, CancellationToken.None));

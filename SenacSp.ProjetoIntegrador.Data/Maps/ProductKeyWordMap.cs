@@ -22,7 +22,7 @@ namespace SenacSp.ProjetoIntegrador.Data.Maps
 
             builder.HasOne(x => x.KeyWord)
                 .WithMany(x => x.Products)
-                .HasForeignKey(x => x.ProductId)
+                .HasForeignKey(x => x.KeyWordId)
                 .IsRequired();
         }
     }

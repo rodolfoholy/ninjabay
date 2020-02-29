@@ -24,22 +24,6 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         public QuestionAndAnswersController(IDomainNotification domainNotification) : base(domainNotification)
         {
         }
-        #region SwaggerDoc
-        [ProducesResponseType(typeof(EnvelopDataResult<DefaultResult>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Forbidden)]
-        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Unauthorized)]
-        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.UnprocessableEntity)]
-        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
-        #endregion 
-
-        [HttpPost("{idProduct:guid}")]
-        public async Task<IActionResult> SaveProductQuestionAndAnswers(AddQuestionsAndAnswerProductCommand command, Guid idProduct) 
-        {
-            command.Id = idProduct;
-            return CreateResponse(await _mediator.Send(command, CancellationToken.None));
-        }
-
         [HttpGet]
         public IActionResult Get() => Ok("teste12345");
     }
