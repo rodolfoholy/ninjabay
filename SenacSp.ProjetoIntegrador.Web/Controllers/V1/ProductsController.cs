@@ -41,7 +41,6 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand command)
             => CreateResponse(await _mediator.Send(command, CancellationToken.None));
 
-
         #region SwaggerDoc
         [ProducesResponseType(typeof(EnvelopDataResult<DefaultResult>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Forbidden)]
