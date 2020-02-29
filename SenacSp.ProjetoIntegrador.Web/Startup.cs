@@ -38,7 +38,7 @@ namespace SenacSp.ProjetoIntegrador.Web
                             builder.AllowAnyOrigin()
                                 .AllowAnyMethod()
                                 .AllowAnyHeader()
-                                //.WithOrigins(Configuration.GetSection("AppConfig:BaseUrl").Value)
+                                .AllowAnyOrigin()
                                 .AllowCredentials());
                 })
                 .AppAddCompression()
