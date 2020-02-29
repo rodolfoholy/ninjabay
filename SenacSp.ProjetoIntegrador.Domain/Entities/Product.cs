@@ -26,8 +26,23 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
             Description = description,
             Name = name,
             Price = price.Value,
-            Quantity = quantity.Value
+            Quantity = quantity.Value,
         };
+        public void SetKeyWords(IEnumerable<Guid> keyWordIds)
+        {
+            foreach (Guid keyWordId in keyWordIds)
+            {
+                KeyWords.Add( ProductKeyWord.New(Id, keyWordId));
+            }
+        }
+
+        public void Update(string name, string description, decimal? price = null, int? quantity = null)
+        {
+            Description = string.IsNullOrEmpty(description) ? Description: description;
+            Name = string.IsNullOrEmpty(name) ? Name : name ;
+            Price = price.HasValue ? price.Value : Price;
+            Quantity = quantity.HasValue ? quantity.Value : Quantity;
+        }
 
     }
 }

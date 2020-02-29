@@ -11,5 +11,11 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
         public KeyWord KeyWord { get; private set; }
         public Guid KeyWordId { get; private set; }
 
+        public static ProductKeyWord New(Guid productId, Guid keyWordId) => new ProductKeyWord
+        {
+            KeyWordId = keyWordId,
+            ProductId = productId
+        };
+
     }
 }
