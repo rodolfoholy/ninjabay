@@ -17,7 +17,8 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
         IRequestHandler<CreateProductCommand, CreateProductResult>,
         IRequestHandler<UpdateProductCommand, CreateProductResult>,
         IRequestHandler<ChangeStockQuantityCommand, DefaultResult>,
-        IRequestHandler<AddQuestionsAndAnswerProductCommand, DefaultResult>
+        IRequestHandler<AddQuestionsAndAnswerProductCommand, DefaultResult>,
+        IRequestHandler<InsertProductImageCommand, DefaultResult>
 
     {
         private readonly IProductRepository _productRepository;
@@ -135,6 +136,11 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
                 return result;
             }
             return result;
+        }
+
+        public Task<DefaultResult> Handle(InsertProductImageCommand request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

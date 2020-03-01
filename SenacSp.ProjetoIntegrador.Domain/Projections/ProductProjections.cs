@@ -16,7 +16,8 @@ namespace SenacSp.ProjetoIntegrador.Domain.Projections
         IsAvailable = product.IsAvailabe(product),
         Name = product.Name,
         Price = product.Price,
-        Quantity = product.Quantity
+        Quantity = product.Quantity,
+        KeyWords = product.KeyWords.Select(x => x.KeyWord).ToVm()
         };
 
         public static IQueryable<ProductVm> ToVm(this IQueryable<Product> query) => query.Select(product => new ProductVm 
@@ -26,7 +27,8 @@ namespace SenacSp.ProjetoIntegrador.Domain.Projections
             IsAvailable = product.IsAvailabe(product),
             Name = product.Name,
             Price = product.Price,
-            Quantity = product.Quantity
+            Quantity = product.Quantity,
+            KeyWords = product.KeyWords.Select(x => x.KeyWord).ToVm()
 
         });
 
@@ -37,7 +39,8 @@ namespace SenacSp.ProjetoIntegrador.Domain.Projections
             IsAvailable = product.IsAvailabe(product),
             Name = product.Name,
             Price = product.Price,
-            Quantity = product.Quantity
+            Quantity = product.Quantity,
+            KeyWords = product.KeyWords.Select(x => x.KeyWord).ToVm()
 
         });
     }
