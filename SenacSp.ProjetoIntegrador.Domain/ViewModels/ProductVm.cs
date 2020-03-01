@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SenacSp.ProjetoIntegrador.Shared.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,5 +14,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.ViewModels
         public int Quantity { get;  set; }
         public decimal Price { get;  set; }
         public IEnumerable<KeyWordVm> KeyWords { get; set; } = new List<KeyWordVm>();
+
+        public IEnumerable<QuestionAnswer> QuestionAndAnswers { get; set; } = new List<QuestionAnswer>();
     }
 }

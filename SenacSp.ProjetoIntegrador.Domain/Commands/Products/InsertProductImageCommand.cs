@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SenacSp.ProjetoIntegrador.Domain.Commands.Products
 {
-    public class InsertProductImageCommand : IRequest<DefaultResult>
+    public class InsertProductImageCommand : IRequest<SaveImageResult>
     {
         [JsonIgnore]
         public Guid ProductId { get; set; }

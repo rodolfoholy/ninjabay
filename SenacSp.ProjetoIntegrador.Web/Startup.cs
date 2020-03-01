@@ -46,6 +46,7 @@ namespace SenacSp.ProjetoIntegrador.Web
                 .AppAddIoCServices(Configuration)
                 .AppAddDatabase(Configuration)
                 .AppAddApiDocs()
+                .AppAddAwsS3Service(Configuration)
                 .AppAddMediator();
 
             //if (Env.IsProduction())

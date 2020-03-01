@@ -22,7 +22,9 @@ namespace SenacSp.ProjetoIntegrador.Shared.Configs
 
         public string BucketBaseUrl { get; set; }
 
-        public string BuildProductsPath(string key) => $"{BucketBaseUrl}/{ProductsPath}/{key}";
+        public string BuildProductsFullPath(Guid productId,string key) => $"{BucketBaseUrl}/{ProductsPath}/{productId}/{key}";
+
+        public string BuildProductsS3Path(Guid productId, string key) => $"{ProductsPath}/{productId}/{key}";
         public string BuildAvatarPath(string key) => $"{BucketBaseUrl}/{AvatarsPath}/{key}";
 
         public string BuildClientLogoPath(string key) => $"{AvatarsPath}/{key}";

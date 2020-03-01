@@ -1,8 +1,11 @@
 ﻿using MediatR;
 using SenacSp.ProjetoIntegrador.Domain.Commands.Products;
+using SenacSp.ProjetoIntegrador.Domain.Contracts.Infra;
 using SenacSp.ProjetoIntegrador.Domain.Contracts.Repositories;
 using SenacSp.ProjetoIntegrador.Domain.Entities;
 using SenacSp.ProjetoIntegrador.Domain.Results;
+using SenacSp.ProjetoIntegrador.Shared.Configs;
+using SenacSp.ProjetoIntegrador.Shared.Extensions;
 using SenacSp.ProjetoIntegrador.Shared.Notifications;
 using SenacSp.ProjetoIntegrador.Shared.Persistence;
 using System;
@@ -18,15 +21,26 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
         IRequestHandler<UpdateProductCommand, CreateProductResult>,
         IRequestHandler<ChangeStockQuantityCommand, DefaultResult>,
         IRequestHandler<AddQuestionsAndAnswerProductCommand, DefaultResult>,
-        IRequestHandler<InsertProductImageCommand, DefaultResult>
+        IRequestHandler<InsertProductImageCommand, SaveImageResult>
 
     {
         private readonly IProductRepository _productRepository;
         private readonly IProductQuestionAnswerRepository _productQuestionAnswerRepository;
-        public ProductCommandHandler(IUnitOfWork uow, IDomainNotification notifications, IProductRepository productRepository, IProductQuestionAnswerRepository productQuestionAnswerRepository) : base(uow, notifications)
+        private readonly IAwsS3StorageService _awsS3StorageService;
+        private readonly AwsS3Config _awsS3Config;
+        private readonly IProductImageRepository _productImageRepository;
+        public ProductCommandHandler(IUnitOfWork uow, IDomainNotification notifications,
+            IProductRepository productRepository,
+            IProductQuestionAnswerRepository productQuestionAnswerRepository,
+            IAwsS3StorageService awsS3StorageService,
+            IProductImageRepository productImageRepository,
+            AwsS3Config awsS3Config) : base(uow, notifications)
         {
             _productQuestionAnswerRepository = productQuestionAnswerRepository;
             _productRepository = productRepository;
+            _awsS3StorageService = awsS3StorageService;
+            _awsS3Config = awsS3Config;
+            _productImageRepository = productImageRepository;
         }
 
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
@@ -123,6 +137,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
                 Notifications.Handle("Não foi possivel encontrar Produto");
                 return null;
             }
+
             var questionsAnswers = new List<ProductQA>();
 
             foreach (var questionAnswer in command.QuestionsAndAnswers)
@@ -138,9 +153,37 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
             return result;
         }
 
-        public Task<DefaultResult> Handle(InsertProductImageCommand request, CancellationToken cancellationToken)
+        public async Task<SaveImageResult> Handle(InsertProductImageCommand command, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var result = new SaveImageResult();
+            
+            var product = await _productRepository.FindAsync(x => x.Id == command.ProductId);
+            if (product == null)
+            {
+                Notifications.Handle("Produto Não encotrado");
+                return null;
+            }
+            foreach (var file in command.Files)
+            {
+
+                var s3FilefullPath = _awsS3Config.BuildProductsFullPath(command.ProductId, Guid.NewGuid().ToString());
+
+                result.Links.Add(s3FilefullPath);
+
+                var storedFile = await _awsS3StorageService.StoreFile(file.Buffer, _awsS3Config.BuildProductsS3Path(command.ProductId, Guid.NewGuid().ToString()), true); ;
+               
+                if (storedFile.IsNull())
+                {
+                    Notifications.Handle("Erro ao salvar Imagem");
+                    return null;
+                }
+                _productImageRepository.Add(ProductImage.New(product.Id, s3FilefullPath));
+            };
+            if (!await CommitAsync())
+            {
+                return result;
+            }
+            return result;
         }
     }
 }
