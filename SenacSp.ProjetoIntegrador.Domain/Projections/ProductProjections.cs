@@ -19,7 +19,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.Projections
         Quantity = product.Quantity,
         KeyWords = product.KeyWords.Select(x => x.KeyWord).ToVm(),
         QuestionAndAnswers = product.QuestionsAndAnswers.Select(x => x.QuestionAndAnswer), 
-        Links = product.Images.Select(x => x.ImagePath)
+        Links = product.Images.ToVm()
         };
 
         public static IQueryable<ProductVm> ToVm(this IQueryable<Product> query) => query.Select(product => new ProductVm 
@@ -32,8 +32,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.Projections
             Quantity = product.Quantity,
             KeyWords = product.KeyWords.Select(x => x.KeyWord).ToVm(),
             QuestionAndAnswers = product.QuestionsAndAnswers.Select(x => x.QuestionAndAnswer),
-            Links = product.Images.Select(x => x.ImagePath)
-
+            Links = product.Images.ToVm()
         });
 
         public static IEnumerable<ProductVm> ToVm(this IEnumerable<Product> query) => query.Select(product => new ProductVm
@@ -46,7 +45,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.Projections
             Quantity = product.Quantity,
             KeyWords = product.KeyWords.Select(x => x.KeyWord).ToVm(),
             QuestionAndAnswers = product.QuestionsAndAnswers.Select(x => x.QuestionAndAnswer),
-            Links = product.Images.Select(x => x.ImagePath)
+            Links = product.Images.ToVm()
 
         });
     }

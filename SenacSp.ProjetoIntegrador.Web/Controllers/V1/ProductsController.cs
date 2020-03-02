@@ -42,7 +42,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
             => CreateResponse(await _mediator.Send(command, CancellationToken.None));
 
         #region SwaggerDoc
-        [ProducesResponseType(typeof(EnvelopDataResult<DefaultResult>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(EnvelopDataResult<SaveImageResult>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Unauthorized)]
@@ -56,6 +56,9 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
             command.ProductId = id;
             return CreateResponse(await _mediator.Send(command, CancellationToken.None));
         }
+
+        [HttpDelete("images/{productImageId:guid}")]
+        public async Task<IActionResult> DeleteProductImage(Guid productImageId) => CreateResponse(await _mediator.Send(new DeleteProductImageCommand { Id = productImageId }, CancellationToken.None));
 
         #region SwaggerDoc
         [ProducesResponseType(typeof(EnvelopDataResult<DefaultResult>), (int)HttpStatusCode.OK)]

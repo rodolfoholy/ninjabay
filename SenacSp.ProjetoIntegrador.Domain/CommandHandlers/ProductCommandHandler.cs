@@ -21,7 +21,8 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
         IRequestHandler<UpdateProductCommand, CreateProductResult>,
         IRequestHandler<ChangeStockQuantityCommand, DefaultResult>,
         IRequestHandler<AddQuestionsAndAnswerProductCommand, DefaultResult>,
-        IRequestHandler<InsertProductImageCommand, SaveImageResult>
+        IRequestHandler<InsertProductImageCommand, SaveImageResult>,
+        IRequestHandler<DeleteProductImageCommand,DefaultResult>
 
     {
         private readonly IProductRepository _productRepository;
@@ -184,6 +185,32 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
                 return result;
             }
             return result;
+        }
+
+        public async Task<DefaultResult> Handle(DeleteProductImageCommand command, CancellationToken cancellationToken)
+        {
+            var result = new DefaultResult();
+
+            var productImage = await _productImageRepository.FindAsync(x => x.Id == command.Id);
+
+            if (productImage == null)
+            {
+                Notifications.Handle("Imagem de produto não encontrado");
+                return null;
+            }
+            if (!(await _awsS3StorageService.DeleteFile(productImage.ImagePath)))
+            {
+                Notifications.Handle("Não foi possivel deletar a imagem");
+                return null;
+            }
+                _productImageRepository.Remove(productImage);
+
+            if (!await CommitAsync())
+            {
+                return result;
+            }
+            return result;
+
         }
     }
 }

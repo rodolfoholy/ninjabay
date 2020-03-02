@@ -114,7 +114,7 @@ namespace SenacSp.ProjetoIntegrador.Data.Migrations
                         .HasColumnName("id")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ImagePath")
+                    b.Property<string>("ImageFullPath")
                         .IsRequired()
                         .HasColumnName("image_path")
                         .HasColumnType("text");
