@@ -176,7 +176,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
                     Notifications.Handle("Erro ao salvar Imagem");
                     return null;
                 }
-                _productImageRepository.Add(ProductImage.New(product.Id, s3FilefullPath));
+                _productImageRepository.Add(ProductImage.New(product.Id, storedFile));
                 result.Links.Add(storedFile);
             };
             if (!await CommitAsync())
