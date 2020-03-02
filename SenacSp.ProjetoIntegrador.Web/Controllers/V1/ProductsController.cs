@@ -46,7 +46,6 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Unauthorized)]
-        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.UnprocessableEntity)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
         #endregion  
 
@@ -114,7 +113,6 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Unauthorized)]
-        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.UnprocessableEntity)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
         #endregion
         [HttpDelete("{id:guid}")]
@@ -126,7 +124,6 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Unauthorized)]
-        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.UnprocessableEntity)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
         #endregion
 
@@ -145,9 +142,5 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [HttpGet]
         public async Task<IActionResult> GetProducts([FromQuery] ProductFilter filter)
             => CreateResponse(await _mediator.Send(new PagedProductListQuery { Filter = filter}, CancellationToken.None));
-
-
-
-
     }
 }

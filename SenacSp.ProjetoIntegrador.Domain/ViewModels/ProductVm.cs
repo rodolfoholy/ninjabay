@@ -15,6 +15,6 @@ namespace SenacSp.ProjetoIntegrador.Domain.ViewModels
         public decimal Price { get;  set; }
         public IEnumerable<KeyWordVm> KeyWords { get; set; } = new List<KeyWordVm>();
         public IEnumerable<ProductImageVm> Links { get; set; } = new List<ProductImageVm>();
-        public IEnumerable<QuestionAnswer> QuestionAndAnswers { get; set; } = new List<QuestionAnswer>();
+        public IEnumerable<ProductQAVm> QuestionAndAnswers { get; set; } = new List<ProductQAVm>();
     }
 }

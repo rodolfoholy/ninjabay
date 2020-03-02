@@ -12,7 +12,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
         public Product Product { get; private set; }
         public Guid ProductId { get; private set; }
 
-        public QuestionAnswer QuestionAndAnswer { get; set; }
+        public QuestionAnswer QuestionAndAnswer { get;private set; }
 
         public static ProductQA New(Guid productId, QuestionAnswer questionAnswer) => new ProductQA
         {

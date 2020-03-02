@@ -170,7 +170,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
                 var s3FilefullPath = _awsS3Config.BuildProductsFullPath(command.ProductId, Guid.NewGuid().ToString());
 
 
-                var storedFile = await _awsS3StorageService.StoreFile(file.Buffer, _awsS3Config.BuildProductsS3Path(command.ProductId, Guid.NewGuid().ToString()), true); ;
+                var storedFile = await _awsS3StorageService.StoreFile(file.Buffer, _awsS3Config.BuildProductsS3Path(command.ProductId, Guid.NewGuid().ToString()), true);
                
                 if (storedFile.IsNull())
                 {
@@ -212,5 +212,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
             return result;
 
         }
+
+        
     }
 }

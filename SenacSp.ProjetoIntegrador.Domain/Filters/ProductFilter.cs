@@ -10,6 +10,8 @@ namespace SenacSp.ProjetoIntegrador.Domain.Filters
         public string Name { get; set; }
 
         public Guid? KeyWordId { get; set; }
+
+        public bool? IsActive { get; set; } = true;
         public decimal? MinValue { get; set; }
 
         public decimal? MaxValue { get; set; }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SenacSp.ProjetoIntegrador.Domain.Commands.ProductQA;
 using SenacSp.ProjetoIntegrador.Domain.Commands.Products;
 using SenacSp.ProjetoIntegrador.Domain.Results;
 using SenacSp.ProjetoIntegrador.Shared.Notifications;
@@ -24,8 +25,30 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         public QuestionAndAnswersController(IDomainNotification domainNotification) : base(domainNotification)
         {
         }
-        [HttpGet]
-        public IActionResult Get() => Ok("teste12345");
+
+        #region SwaggerDoc
+        [ProducesResponseType(typeof(EnvelopDataResult<DefaultResult>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
+        #endregion
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateProductQA(Guid id, UpdateProductQACommand command)
+        {
+            command.Id = id;
+            return CreateResponse(await _mediator.Send(command, CancellationToken.None));
+        }
+
+        #region SwaggerDoc
+        [ProducesResponseType(typeof(EnvelopDataResult<DefaultResult>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Forbidden)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
+        #endregion
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteProductQA(Guid id) => CreateResponse(await _mediator.Send(new DeleteProductQACommand { Id = id }, CancellationToken.None));
     }
 }
 

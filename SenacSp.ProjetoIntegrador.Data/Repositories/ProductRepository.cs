@@ -33,6 +33,8 @@ namespace SenacSp.ProjetoIntegrador.Data.Repositories
                 ? predicate
                 : predicate.And(x => x.Price <= filter.MaxValue.Value);
 
+            predicate = predicate.And(x => x.IsActive == filter.IsActive);
+
             predicate = !filter.MinValue.HasValue
                 ? predicate
                 : predicate.And(x => x.Price >= filter.MinValue.Value);

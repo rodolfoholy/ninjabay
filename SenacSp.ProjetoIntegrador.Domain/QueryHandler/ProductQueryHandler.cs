@@ -29,7 +29,6 @@ namespace SenacSp.ProjetoIntegrador.Domain.QueryHandler
         public async Task<PagedList<ProductVm>> Handle(PagedProductListQuery query, CancellationToken cancellationToken)
         {
             var where = _productRepository.Where(query.Filter);
-
             var count = await _productRepository.CountAsync(where);
 
             var products = _productRepository.ListAsNoTracking(where, query.Filter).ToVm();
