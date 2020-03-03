@@ -22,8 +22,9 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
     public class QuestionAndAnswersController : BaseApiController
     {
         private readonly IMediator _mediator;
-        public QuestionAndAnswersController(IDomainNotification domainNotification) : base(domainNotification)
+        public QuestionAndAnswersController(IDomainNotification domainNotification, IMediator mediator) : base(domainNotification)
         {
+            _mediator = mediator;
         }
 
         #region SwaggerDoc

@@ -21,6 +21,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
         public void ChangeStatus() {
             IsActive = !IsActive;
             }
+
         public static Product New(string name, string description,decimal? price = null, int? quantity = null) => new Product
         {
             Id = Guid.NewGuid(),
@@ -37,6 +38,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
                 KeyWords.Add( ProductKeyWord.New(Id, keyWordId));
             }
         }
+
 
         public void Update(string name, string description, decimal? price = null, int? quantity = null)
         {

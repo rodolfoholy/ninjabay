@@ -22,7 +22,8 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
         IRequestHandler<ChangeStockQuantityCommand, DefaultResult>,
         IRequestHandler<AddQuestionsAndAnswerProductCommand, DefaultResult>,
         IRequestHandler<InsertProductImageCommand, SaveImageResult>,
-        IRequestHandler<DeleteProductImageCommand,DefaultResult>
+        IRequestHandler<DeleteProductImageCommand,DefaultResult>,
+        IRequestHandler<ChangeProductStatusCommand,DefaultResult>
 
     {
         private readonly IProductRepository _productRepository;
@@ -213,6 +214,26 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
 
         }
 
-        
+        public async Task<DefaultResult> Handle(ChangeProductStatusCommand command, CancellationToken cancellationToken)
+        {
+            var result = new DefaultResult();
+            
+            var product = await _productRepository.FindAsync(x => x.Id == command.Id);
+            if (product == null)
+            {
+                Notifications.Handle("Produto não encontrado");
+                return null;
+            }
+            product.ChangeStatus();
+
+            _productRepository.Modify(product);
+
+
+            if (!await CommitAsync())
+            {
+                return null;
+            }
+            return result;
+        }
     }
 }
