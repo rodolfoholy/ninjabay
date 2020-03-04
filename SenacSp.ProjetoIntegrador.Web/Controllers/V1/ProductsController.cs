@@ -49,7 +49,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
         #endregion  
 
-        [HttpPatch("images/{id:guid}")]
+        [HttpPost("images/{id:guid}")]
         public async Task<IActionResult> SaveProductImages(Guid id, [FromBody] InsertProductImageCommand command)
         {
             command.ProductId = id;
@@ -68,7 +68,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
         #endregion 
 
-        [HttpPatch("questions-answers/{idProduct:guid}")]
+        [HttpPost("questions-answers/{idProduct:guid}")]
         public async Task<IActionResult> SaveProductQuestionAndAnswers(Guid idProduct,AddQuestionsAndAnswerProductCommand command)
         {
             command.Id = idProduct;
