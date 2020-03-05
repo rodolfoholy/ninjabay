@@ -1,11 +1,9 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using Newtonsoft.Json;
 using SenacSp.ProjetoIntegrador.Domain.Results;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace SenacSp.ProjetoIntegrador.Domain.Commands.Products
+namespace SenacSp.ProjetoIntegrador.Domain.Commands.ProductImage
 {
     public class DeleteProductImageCommand : IRequest<DefaultResult>
     {

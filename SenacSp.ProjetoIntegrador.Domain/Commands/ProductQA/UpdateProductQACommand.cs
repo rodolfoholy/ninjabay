@@ -9,7 +9,7 @@ using System.Text;
 
 namespace SenacSp.ProjetoIntegrador.Domain.Commands.ProductQA
 {
-    public class UpdateProductQACommand : IRequest<DefaultResult>
+    public class UpdateProductQaCommand : IRequest<DefaultResult>
     {
         [JsonIgnore]
         public Guid Id { get; set; }

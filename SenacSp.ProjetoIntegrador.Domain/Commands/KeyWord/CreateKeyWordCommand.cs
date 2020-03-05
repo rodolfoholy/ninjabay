@@ -1,10 +1,7 @@
 ﻿using MediatR;
 using SenacSp.ProjetoIntegrador.Domain.Results;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace SenacSp.ProjetoIntegrador.Domain.Commands.KeyWords
+namespace SenacSp.ProjetoIntegrador.Domain.Commands.KeyWord
 {
    public class CreateKeyWordCommand : IRequest<DefaultResult>
     {

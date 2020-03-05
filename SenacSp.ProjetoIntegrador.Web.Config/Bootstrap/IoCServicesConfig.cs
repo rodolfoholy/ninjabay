@@ -14,7 +14,7 @@ using SenacSp.ProjetoIntegrador.Shared.Persistence;
 using SenacSp.ProjetoIntegrador.Data;
 using SenacSp.ProjetoIntegrador.Data.Repositories;
 using SenacSp.ProjetoIntegrador.Shared.Configs;
-using SenacSp.ProjetoIntegrador.Domain.Validators;
+using SenacSp.ProjetoIntegrador.Domain.Validators.Product;
 
 namespace SenacSp.ProjetoIntegrador.Web.Config.Bootstrap
 {

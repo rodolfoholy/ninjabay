@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using SenacSp.ProjetoIntegrador.Domain.Commands.KeyWords;
 using SenacSp.ProjetoIntegrador.Domain.Contracts.Repositories;
 using SenacSp.ProjetoIntegrador.Domain.Entities;
 using SenacSp.ProjetoIntegrador.Domain.Results;
@@ -10,6 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SenacSp.ProjetoIntegrador.Domain.Commands.KeyWord;
 
 namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
 {

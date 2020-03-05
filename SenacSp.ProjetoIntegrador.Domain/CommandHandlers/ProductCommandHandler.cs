@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SenacSp.ProjetoIntegrador.Domain.Commands.ProductImage;
+using SenacSp.ProjetoIntegrador.Domain.Commands.ProductQA;
 
 namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
 {

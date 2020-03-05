@@ -35,7 +35,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
         #endregion
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> UpdateProductQA(Guid id, UpdateProductQACommand command)
+        public async Task<IActionResult> UpdateProductQA(Guid id, UpdateProductQaCommand command)
         {
             command.Id = id;
             return CreateResponse(await _mediator.Send(command, CancellationToken.None));
@@ -49,7 +49,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
         #endregion
         [HttpDelete("{id:guid}")]
-        public async Task<IActionResult> DeleteProductQA(Guid id) => CreateResponse(await _mediator.Send(new DeleteProductQACommand { Id = id }, CancellationToken.None));
+        public async Task<IActionResult> DeleteProductQA(Guid id) => CreateResponse(await _mediator.Send(new DeleteProductQaCommand { Id = id }, CancellationToken.None));
     }
 }
 

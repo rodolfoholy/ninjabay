@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SenacSp.ProjetoIntegrador.Domain.Commands.KeyWords;
 using SenacSp.ProjetoIntegrador.Domain.Queries.KeyWord;
 using SenacSp.ProjetoIntegrador.Domain.Results;
 using SenacSp.ProjetoIntegrador.Domain.ViewModels;
@@ -10,6 +9,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using SenacSp.ProjetoIntegrador.Domain.Commands.KeyWord;
 
 namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
 {

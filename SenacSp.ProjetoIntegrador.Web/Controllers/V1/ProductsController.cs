@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SenacSp.ProjetoIntegrador.Domain.Commands.ProductImage;
+using SenacSp.ProjetoIntegrador.Domain.Commands.ProductQA;
 using SenacSp.ProjetoIntegrador.Domain.Commands.Products;
 using SenacSp.ProjetoIntegrador.Domain.Filters;
 using SenacSp.ProjetoIntegrador.Domain.Queries;

@@ -14,15 +14,15 @@ using System.Threading.Tasks;
 namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
 {
     public class ProductQuestionAnswerCommandHandler : BaseCommandHandler,
-                IRequestHandler<DeleteProductQACommand, DefaultResult>,
-                IRequestHandler<UpdateProductQACommand, DefaultResult>
+                IRequestHandler<DeleteProductQaCommand, DefaultResult>,
+                IRequestHandler<UpdateProductQaCommand, DefaultResult>
     {
         private readonly IProductQuestionAnswerRepository _productQuestionAnswerRepository;
         public ProductQuestionAnswerCommandHandler(IUnitOfWork uow, IDomainNotification notifications, IProductQuestionAnswerRepository productQuestionAnswerRepository) : base(uow, notifications)
         {
             _productQuestionAnswerRepository = productQuestionAnswerRepository;
         }
-        public async Task<DefaultResult> Handle(DeleteProductQACommand command, CancellationToken cancellationToken)
+        public async Task<DefaultResult> Handle(DeleteProductQaCommand command, CancellationToken cancellationToken)
         {
             var result = new DefaultResult();
 
@@ -42,7 +42,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
             return result;
         }
 
-        public async Task<DefaultResult> Handle(UpdateProductQACommand command, CancellationToken cancellationToken)
+        public async Task<DefaultResult> Handle(UpdateProductQaCommand command, CancellationToken cancellationToken)
         {
             var result = new DefaultResult();
 

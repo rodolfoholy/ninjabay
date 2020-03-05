@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SenacSp.ProjetoIntegrador.Domain.Validators
+namespace SenacSp.ProjetoIntegrador.Domain.Validators.Product
 {
     public static class UserCommandValidatorExtensions
     {
