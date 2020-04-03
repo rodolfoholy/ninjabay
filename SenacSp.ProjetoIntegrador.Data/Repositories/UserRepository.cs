@@ -17,7 +17,7 @@ namespace SenacSp.ProjetoIntegrador.Data.Repositories
 
         }
 
-        public Expression<Func<User, bool>> Filter(UserFilter filter)
+        public Expression<Func<User, bool>> Where(UserFilter filter)
         {
             var predicate = PredicateBuilder.True<User>();
 

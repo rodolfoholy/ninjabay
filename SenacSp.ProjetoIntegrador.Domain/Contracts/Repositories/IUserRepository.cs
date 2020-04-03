@@ -10,6 +10,6 @@ namespace SenacSp.ProjetoIntegrador.Domain.Contracts.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-        Expression<Func<User, bool>> Filter(UserFilter filter);
+        Expression<Func<User, bool>> Where(UserFilter filter);
     }
 }

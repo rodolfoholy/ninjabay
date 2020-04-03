@@ -144,8 +144,5 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [HttpGet]
         public async Task<IActionResult> GetProducts([FromQuery] ProductFilter filter)
             => CreateResponse(await _mediator.Send(new PagedProductListQuery { Filter = filter}, CancellationToken.None));
-
-        [HttpGet]
-        public IActionResult Test() => Ok("Teste");
     }
 }

@@ -9,7 +9,6 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
     {
         public User()
         {
-
         }
 
         public Guid Id { get; private set; }
@@ -24,13 +23,22 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
         public EUserType Type { get; private set; }
 
         public void ChangeStatus() => Active = !Active;
-        public static User New(string email, string senha, string name, EUserType type) => new User { Id = Guid.NewGuid(), Email = email, Senha = senha, Nome = name, Active = true, Type = type };
+
+        public static User New(string email, string senha, string name, EUserType type)
+            => new User
+            {
+                Id = Guid.NewGuid(),
+                Email = email,
+                Senha = senha,
+                Nome = name, Active = true,
+                Type = type
+            };
+
         public void Update(string email, string name, EUserType type)
         {
             Email = email;
             Nome = name;
             Type = type;
         }
-
     }
 }

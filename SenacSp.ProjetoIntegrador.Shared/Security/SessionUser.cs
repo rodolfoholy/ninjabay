@@ -14,13 +14,8 @@ namespace SenacSp.ProjetoIntegrador.Shared.Security
         public string Name { get; set; }
 
         public string Email { get; set; }
-
-        public Identification Cpf { get; set; }
-
         public string UserType { get; set; }
-
-        public string AvatarPath { get; set; }
-
+        
         public static SessionUser User(IEnumerable<Claim> claims)
         {
             var sessionUser = new SessionUser();
@@ -34,12 +29,9 @@ namespace SenacSp.ProjetoIntegrador.Shared.Security
 
             sessionUser.Name = claimsArray.FirstOrDefault(x => x.Type == CustomClaims.Name)
                 ?.Value;
-
-
+            
             sessionUser.UserType = claimsArray.FirstOrDefault(x => x.Type == CustomClaims.Type)
                 ?.Value;
-            sessionUser.AvatarPath = claimsArray.FirstOrDefault(x => x.Type == CustomClaims.Avatar)?.Value;
-
             return sessionUser;
         }
 
@@ -50,7 +42,6 @@ namespace SenacSp.ProjetoIntegrador.Shared.Security
             claims.Add(new Claim(CustomClaims.Email, Email));
             claims.Add(new Claim(CustomClaims.Name, Name ?? ""));
             claims.Add(new Claim(CustomClaims.Type, UserType ?? ""));
-            claims.Add(new Claim(CustomClaims.Avatar, AvatarPath ?? ""));
             return claims;
         }
         public virtual ClaimsPrincipal ClaimsPrincipal() => new ClaimsPrincipal(new[] { new ClaimsIdentity(Claims()) });
