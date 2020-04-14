@@ -25,5 +25,6 @@ namespace SenacSp.ProjetoIntegrador.Data.Maps
                     .HasColumnName("answer");
             });
         }
+        
     }
 }

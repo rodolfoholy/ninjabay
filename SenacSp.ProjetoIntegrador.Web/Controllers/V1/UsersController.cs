@@ -35,8 +35,8 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
             command.Id = id;
             return CreateResponse(await _mediator.Send(command,CancellationToken.None));
         }
+        
         [Authorize]
-
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> ChangeUserStatus( Guid id) => CreateResponse(await _mediator.Send(new ChangeUserStatusCommand{Id = id}, CancellationToken.None));
         [Authorize]

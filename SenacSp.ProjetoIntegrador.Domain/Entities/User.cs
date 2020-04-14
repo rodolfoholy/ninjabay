@@ -1,6 +1,7 @@
 ﻿using SenacSp.ProjetoIntegrador.Shared.Enums;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Text;
 
 namespace SenacSp.ProjetoIntegrador.Domain.Entities
@@ -16,8 +17,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
         public string Email { get; private set; }
 
         public string Senha { get; private set; }
-        public string Nome { get; private set; }
-
+        public string Nome { get; private set; }    
         public bool Active { get; private set; }
 
         public EUserType Type { get; private set; }
@@ -40,5 +40,12 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
             Nome = name;
             Type = type;
         }
+
+        public void Update(string name, string senha)
+        {
+            Nome = name;
+            Senha = senha;
+        }
+        
     }
 }

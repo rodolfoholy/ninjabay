@@ -4,7 +4,9 @@ using MediatR;
 using SenacSp.ProjetoIntegrador.Domain.Commands.Auth;
 using SenacSp.ProjetoIntegrador.Domain.Contracts.Repositories;
 using SenacSp.ProjetoIntegrador.Domain.Contracts.Services;
+using SenacSp.ProjetoIntegrador.Domain.Entities;
 using SenacSp.ProjetoIntegrador.Domain.Results;
+using SenacSp.ProjetoIntegrador.Shared.Enums;
 using SenacSp.ProjetoIntegrador.Shared.Notifications;
 using SenacSp.ProjetoIntegrador.Shared.Persistence;
 using SenacSp.ProjetoIntegrador.Shared.Security;
@@ -42,34 +44,53 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
             return result;
         }
 
-        var sessionUser = new SessionUser
+        switch (user.Type)
         {
-        Id = user.Id,
-        Email = user.Email,
-        Name = user.Nome,
-        UserType = user.Type.ToString()
-        };
-        
-        result.UserInfo = sessionUser;
-        
-        result.Token = _jwtTokenConfig.GenerateJwtToken(sessionUser.ClaimsPrincipal());
-
-        // codigo que será usado no futuro quando houver especificação de tipos de usuario
-        // switch (user.Type)
-        // {
-        //     case EUserType.Administrator:
-        //         
-        //         break;
-        //     default:
-        //         return null;
-        // }
-        
-        return result;
+            case EUserType.Administrator:
+                return await HandleAdmin(user);
+            case EUserType.Shopper:
+                return await HandleShopper(user);
+            default:
+                return null;
         }
-        //
-        // private async Task<AuthResult> HandleAdmin(User user)
-        // {
-        //     
-        // };
+        
+        }
+
+        private async Task<AuthResult> HandleAdmin(User user)
+        {
+            var authResult = new AuthResult();
+            
+            var sessionUser = new SessionUser
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Name = user.Nome,
+                UserType = user.Type.ToString()
+            };
+        
+            authResult.UserInfo = sessionUser;
+        
+            authResult.Token = _jwtTokenConfig.GenerateJwtToken(sessionUser.ClaimsPrincipal());
+            
+            return authResult;
+        }
+        
+        private async Task<AuthResult> HandleShopper(User user)
+        {
+            var authResult = new AuthResult();
+            
+            var sessionUser = new ShopperSessionUser()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Name = user.Nome,
+                UserType = user.Type.ToString()
+            };
+        
+            authResult.UserInfo = sessionUser;
+        
+            authResult.Token = _jwtTokenConfig.GenerateJwtToken(sessionUser.ClaimsPrincipal());
+            return authResult;
+        }
     }
 }

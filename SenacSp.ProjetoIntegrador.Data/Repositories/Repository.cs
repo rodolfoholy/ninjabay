@@ -301,9 +301,7 @@ namespace SenacSp.ProjetoIntegrador.Data.Repositories
 
         public void Modify(T entity)
         {
-            var entry = Context.Entry(entity);
-            Context.Set<T>().Attach(entity);
-            entry.State = EntityState.Modified;
+            Context.Set<T>().Update(entity);
         }
 
         public void Remove(T entity)

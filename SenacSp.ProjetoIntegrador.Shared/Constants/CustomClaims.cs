@@ -10,10 +10,6 @@ namespace SenacSp.ProjetoIntegrador.Shared.Constants
         public const string Name = "name";
         public const string Email = "email";
         public const string Type = "type";
-        public const string Profession = "profession";
-        public const string Profile = "profile";
-        public const string Avatar = "avatar";
-
-
+        public const string Address = "address";
     }
 }

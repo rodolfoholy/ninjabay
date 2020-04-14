@@ -7,8 +7,8 @@ namespace SenacSp.ProjetoIntegrador.Shared.Enums
     public enum EUserType
     {
         Administrator,
-        Commom,
-        Stock
+        Shopper,
+        Stocker
     }
 }
 
