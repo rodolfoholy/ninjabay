@@ -9,6 +9,7 @@ using SenacSp.ProjetoIntegrador.Domain.Results;
 using SenacSp.ProjetoIntegrador.Shared.Enums;
 using SenacSp.ProjetoIntegrador.Shared.Notifications;
 using SenacSp.ProjetoIntegrador.Shared.Persistence;
+using SenacSp.ProjetoIntegrador.Shared.Utils;
 
 namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
 {
@@ -65,8 +66,9 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
         public async Task<SaveShopperResult> Handle(UpdateShopperCommand command, CancellationToken cancellationToken)
         {
             var result = new SaveShopperResult();
-
-            var shopper = await _shopperRepository.FindAsync(x => x.Id == command.SessionUser.Id);
+                
+            var include = new IncludeHelper<Shopper>().Include(x => x.User).Includes;
+            var shopper = await _shopperRepository.FindAsync(x => x.Id == command.SessionUser.Id, include);
 
             if (shopper == null)
             {
@@ -74,7 +76,12 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
                 return null;
             }
             
-            shopper.Update(command.Address,command.Name,command.Password);
+            shopper.Update(command.Address,command.Name);
+
+            if (!string.IsNullOrEmpty(command.Password))
+            {
+                shopper.User.UpdatePass(_passwordHasherService.Hash(command.Password));
+            }
             
             result.Id = shopper.Id;
             

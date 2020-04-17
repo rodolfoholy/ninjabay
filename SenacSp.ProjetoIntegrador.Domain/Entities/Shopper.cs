@@ -19,9 +19,9 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
             Id = user.Id
         };
 
-        public void Update( Address address, string name, string password)
+        public void Update( Address address, string name)
         {
-            User.Update(name,password);
+            User.Update(name);
             Address = address;
         }
         

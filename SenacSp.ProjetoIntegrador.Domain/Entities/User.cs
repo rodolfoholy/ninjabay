@@ -41,10 +41,14 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
             Type = type;
         }
 
-        public void Update(string name, string senha)
+        public void Update(string name)
         {
-            Nome = name;
-            Senha = senha;
+            Nome = string.IsNullOrEmpty(name) ? Nome : name;
+        }
+
+        public void UpdatePass(string senha)
+        {
+            Senha = string.IsNullOrEmpty(senha) ? Senha : senha; 
         }
         
     }
