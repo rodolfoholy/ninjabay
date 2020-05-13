@@ -41,7 +41,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         public async Task<IActionResult> GetOrderByid( Guid id) => CreateResponse(await _mediator.Send(new GetOrderByIdQuery{Id = id, SessionUser = _sessionUser},CancellationToken.None));
 
         [HttpGet]
-        public async Task<IActionResult> GetOrderByid([FromQuery]OrderFilter filter)
+        public async Task<IActionResult> GetAllOrders([FromQuery]OrderFilter filter)
         {
             return CreateResponse(await _mediator.Send(new PagedOrderListQuery{ SessionUser = _sessionUser, Filter = filter},CancellationToken.None));
         } 
