@@ -19,11 +19,10 @@ namespace SenacSp.ProjetoIntegrador.Data.Maps
                 .HasColumnName("id")
                 .HasColumnType("uuid")
                 .IsRequired();
-            
+
             builder.HasOne(x => x.Product)
                 .WithMany(x => x.Images)
-                .HasForeignKey(x => x.ProductId)
-                .IsRequired();
+                .HasForeignKey(x => x.ProductId);
 
             builder.Property(x => x.ImagePath)
                 .HasColumnName("image_path")

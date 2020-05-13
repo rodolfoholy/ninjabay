@@ -17,6 +17,8 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
         public ICollection<ProductKeyWord> KeyWords { get; set; } = new List<ProductKeyWord>();
         public ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
 
+        public ICollection<ProductOrder> Orders { get; private set; } = new List<ProductOrder>();
+
         public bool IsAvailabe(Product product) => product.Quantity > 0 && product.IsActive;
         public void ChangeStatus() {
             IsActive = !IsActive;

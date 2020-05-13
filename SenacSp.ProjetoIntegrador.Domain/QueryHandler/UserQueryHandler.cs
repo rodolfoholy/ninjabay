@@ -24,6 +24,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.QueryHandler
         public async Task<PagedList<UserVm>> Handle(PagedListUserQuery query, CancellationToken cancellationToken)
         {
             var where = _userRepository.Where(query.Filter);
+            
             var count = await _userRepository.CountAsync(where);
 
             var users = _userRepository.ListAsNoTracking(where, query.Filter).ToVm();

@@ -10,7 +10,7 @@ namespace SenacSp.ProjetoIntegrador.Shared.Security
     {
         public Address Address { get; set; }
         
-        public static ShopperSessionUser UserPatient(IEnumerable<Claim> claims)
+        public static ShopperSessionUser UserShopper(IEnumerable<Claim> claims)
         {
             var claimsArray = claims as Claim[] ?? claims.ToArray();
             if (!(User(claimsArray) is ShopperSessionUser user))

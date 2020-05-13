@@ -9,9 +9,6 @@ namespace SenacSp.ProjetoIntegrador.Domain.Commands.Shopper
     public class UpdateShopperCommand : BaseCommandWithSessionUser ,IRequest<SaveShopperResult>
     {
         public string Name { get; set; }
-
-        public Address Address { get; set; }
-
         public string Password { get; set; }
     }
 }

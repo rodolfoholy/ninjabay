@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SenacSp.ProjetoIntegrador.Shared.ValueObjects;
 
 namespace SenacSp.ProjetoIntegrador.Domain.Entities
@@ -9,20 +10,23 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
 
         public Identification Cpf { get; private set; }
 
-        public Address Address { get; private set; }
+        public ICollection<ShopperAddress> Addresses { get; private set; } = new List<ShopperAddress>();
+        
 
         public static Shopper New(User user, Identification cpf, Address address) => new Shopper
         {
             User = user,
-            Address = address,
             Cpf = cpf,
             Id = user.Id
         };
 
-        public void Update( Address address, string name)
+        public ICollection<Order> Orders { get; private set; }= new List<Order>();
+
+        public ICollection<ShopperAddress> ShopperAddresses { get; private set; } = new List<ShopperAddress>();
+
+        public void Update( string name)
         {
             User.Update(name);
-            Address = address;
         }
         
     }

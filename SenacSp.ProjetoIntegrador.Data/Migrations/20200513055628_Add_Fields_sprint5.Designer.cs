@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SenacSp.ProjetoIntegrador.Data;
@@ -9,9 +10,10 @@ using SenacSp.ProjetoIntegrador.Data;
 namespace SenacSp.ProjetoIntegrador.Data.Migrations
 {
     [DbContext(typeof(ECommerceDataContext))]
-    partial class ECommerceDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200513055628_Add_Fields_sprint5")]
+    partial class Add_Fields_sprint5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,10 +197,6 @@ namespace SenacSp.ProjetoIntegrador.Data.Migrations
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
-
-                    b.Property<decimal>("PaidPrice")
-                        .HasColumnName("paid_price")
-                        .HasColumnType("numeric");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");

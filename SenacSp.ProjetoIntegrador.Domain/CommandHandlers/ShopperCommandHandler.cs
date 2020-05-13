@@ -76,7 +76,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
                 return null;
             }
             
-            shopper.Update(command.Address,command.Name);
+            shopper.Update(command.Name);
 
             if (!string.IsNullOrEmpty(command.Password))
             {
