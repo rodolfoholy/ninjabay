@@ -23,7 +23,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.QueryHandler
 
         public async Task<IEnumerable<ShopperAddressVm>> Handle(ListShopperAddressQuery query, CancellationToken cancellationToken)
         {
-            return(await _shopperAddressRepository.ListAsNoTrackingAsync()).OrderBy(x => x.Name).ToVm();
+            return( _shopperAddressRepository.ListAsNoTracking()).OrderBy(x => x.Name).ToVm();
         }
     }
 }
