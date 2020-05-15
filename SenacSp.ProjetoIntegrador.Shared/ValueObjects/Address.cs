@@ -52,7 +52,7 @@ namespace SenacSp.ProjetoIntegrador.Shared.ValueObjects
             }
         }
 
-        [ReadOnly(true)]
+        
         public string Complete
         {
             get

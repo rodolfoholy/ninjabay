@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using SenacSp.ProjetoIntegrador.Domain.Commands.Auth;
@@ -10,6 +11,7 @@ using SenacSp.ProjetoIntegrador.Shared.Enums;
 using SenacSp.ProjetoIntegrador.Shared.Notifications;
 using SenacSp.ProjetoIntegrador.Shared.Persistence;
 using SenacSp.ProjetoIntegrador.Shared.Security;
+using SenacSp.ProjetoIntegrador.Shared.Utils;
 
 namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
 {
@@ -19,12 +21,14 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
         private readonly JwtTokenConfig _jwtTokenConfig;
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasherService _passwordHasherService;
+        private readonly IShopperRepository _shopperRepository;
         
-        public AuthorizationCommandHandler(IUnitOfWork uow, IDomainNotification notifications, JwtTokenConfig jwtTokenConfig, IUserRepository userRepository, IPasswordHasherService passwordHasherService) : base(uow, notifications)
+        public AuthorizationCommandHandler(IUnitOfWork uow, IDomainNotification notifications, JwtTokenConfig jwtTokenConfig, IUserRepository userRepository, IPasswordHasherService passwordHasherService, IShopperRepository shopperRepository) : base(uow, notifications)
         {
             _jwtTokenConfig = jwtTokenConfig;
             _userRepository = userRepository;
             _passwordHasherService = passwordHasherService;
+            _shopperRepository = shopperRepository;
         }
 
         public async Task<AuthResult> Handle(AuthCommand command, CancellationToken cancellationToken)
@@ -77,14 +81,24 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
         
         private async Task<AuthResult> HandleShopper(User user)
         {
+            
             var authResult = new AuthResult();
             
+            var shopperInclude = new IncludeHelper<Shopper>()
+                .Include(x => x.User)
+                .Include(x => x.Addresses)
+                .Includes;
+            var shopper = await _shopperRepository.FindAsync(x => x.Id == user.Id,shopperInclude);
+           
             var sessionUser = new ShopperSessionUser()
             {
-                Id = user.Id,
-                Email = user.Email,
-                Name = user.Nome,
-                UserType = user.Type.ToString()
+                Id = shopper.Id,
+                Email = shopper.User.Email,
+                Name = shopper.User.Nome,
+                UserType = shopper.User.Type.ToString(),
+                AddressInformation = shopper.Addresses.First().Address,
+                Identification = shopper.Cpf,
+                AddressId = shopper.Addresses.FirstOrDefault().Id
             };
         
             authResult.UserInfo = sessionUser;

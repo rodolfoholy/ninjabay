@@ -11,5 +11,7 @@ namespace SenacSp.ProjetoIntegrador.Shared.Constants
         public const string Email = "email";
         public const string Type = "type";
         public const string Address = "address";
+        public const string Identification = "identification";
+        public const string AddressId = "addressId";
     }
 }
