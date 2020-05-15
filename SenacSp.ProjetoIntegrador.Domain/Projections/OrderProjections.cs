@@ -23,13 +23,13 @@ namespace SenacSp.ProjetoIntegrador.Domain.Projections
             order => new OrderVm()
             {
                 Id = order.Id,
-                Products = order.Products.ToVm(),
+                Products = order.Products != null ? order.Products.ToVm(): null,
                 Total = order.Total,
                 CreatedAt = order.CreatedAt,
                 OrderIdentifier = order.OrderIdentifier,
                 PaymentMethod = order.PaymentMethod,
                 PaymentStatus = order.PaymentStatus,
-                ShippingAddress = order.ShippingAddress.ToVm()
+                ShippingAddress = order.ShippingAddress != null ?order.ShippingAddress.ToVm(): null
             });
         
         public static IEnumerable<OrderVm> ToVm(this IEnumerable<Order> query) => query.Select(

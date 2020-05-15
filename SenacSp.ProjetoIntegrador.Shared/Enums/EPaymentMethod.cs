@@ -1,8 +1,10 @@
-﻿namespace SenacSp.ProjetoIntegrador.Shared.Enums
+﻿using System.ComponentModel;
+
+namespace SenacSp.ProjetoIntegrador.Shared.Enums
 {
     public enum EPaymentMethod
     {
-        Billet,
-        CreditCard
+        [Description("Boleto")]Billet,
+        [Description("Cartão de Credito")]CreditCard
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SenacSp.ProjetoIntegrador.Domain.Entities;
 using SenacSp.ProjetoIntegrador.Shared.Enums;
+using SenacSp.ProjetoIntegrador.Shared.Extensions;
 
 namespace SenacSp.ProjetoIntegrador.Domain.ViewModels
 {
@@ -17,8 +18,10 @@ namespace SenacSp.ProjetoIntegrador.Domain.ViewModels
 
         public EPaymentMethod PaymentMethod { get;  set; }
 
-        public EPaymentStatus PaymentStatus { get;  set; }
+        public string PaymentMethodDescription => PaymentMethod.Description();
 
+        public EPaymentStatus PaymentStatus { get;  set; }
+        public string PaymentStatusDescription => PaymentStatus.Description();
         public decimal Total { get; set; }
         
         public IEnumerable<ProductOrderVm> Products { get;  set; } = new List<ProductOrderVm>();

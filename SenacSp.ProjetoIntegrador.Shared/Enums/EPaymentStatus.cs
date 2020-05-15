@@ -1,9 +1,12 @@
-﻿namespace SenacSp.ProjetoIntegrador.Shared.Enums
+﻿using System.ComponentModel;
+
+namespace SenacSp.ProjetoIntegrador.Shared.Enums
 {
     public enum EPaymentStatus
     {
-        WaitingApproval,
-        Approved,
-        Unapproved
+       
+        [Description("Aguardando Aprovação")] WaitingApproval,
+        [Description("Aprovado")]Approved,
+        [Description("Desaprovado")]Unapproved
     }
 }
