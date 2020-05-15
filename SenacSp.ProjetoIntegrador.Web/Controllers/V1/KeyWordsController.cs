@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using SenacSp.ProjetoIntegrador.Domain.Commands.KeyWord;
 
 namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
@@ -17,6 +18,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/key-words")]
+    [Authorize]
     public class KeyWordsController : BaseApiController
     {
         private readonly IMediator _mediator;

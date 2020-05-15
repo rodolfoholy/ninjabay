@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SenacSp.ProjetoIntegrador.Domain.Commands.ProductQA;
@@ -34,6 +35,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
         #endregion
+        [Authorize]
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> UpdateProductQA(Guid id, UpdateProductQaCommand command)
         {
@@ -48,6 +50,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(EnvelopResult), (int)HttpStatusCode.InternalServerError)]
         #endregion
+        [Authorize]
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeleteProductQA(Guid id) => CreateResponse(await _mediator.Send(new DeleteProductQaCommand { Id = id }, CancellationToken.None));
     }

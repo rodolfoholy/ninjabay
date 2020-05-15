@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SenacSp.ProjetoIntegrador.Domain.Commands.ShopperAddress;
 using SenacSp.ProjetoIntegrador.Domain.Contracts.Infra;
@@ -16,6 +17,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/shopper-address")]
+    [Authorize]
     public class AddressController : BaseApiController
     {
         private readonly IMediator _mediator;
