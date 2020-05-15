@@ -53,7 +53,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.QueryHandler
                 .Include(x => x.Products.Select(y => y.Product).Select(i => i.Images))
                 .Includes;
             return (await _orderRepository.FindAsync(x =>
-                x.Id == query.Id && x.ShopperId == query.SessionUser.Id, includes)).ToVm();
+                x.Id == query.Id, includes)).ToVm();
         }
 
         public async Task<PagedList<OrderVm>> Handle(PagedAllOrdersListQuery query, CancellationToken cancellationToken)
