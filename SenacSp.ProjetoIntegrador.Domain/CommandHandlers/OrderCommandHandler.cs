@@ -12,7 +12,8 @@ using SenacSp.ProjetoIntegrador.Shared.Persistence;
 namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
 {
     public class OrderCommandHandler : BaseCommandHandler,
-        IRequestHandler<FinalizeOrderCommand, CompleteOrderResult>
+        IRequestHandler<FinalizeOrderCommand, CompleteOrderResult>,
+        IRequestHandler<ChangeOrderStatusCommand,DefaultResult>
     {
         private readonly IProductRepository _productRepository;
         private readonly IOrderRepository _orderRepository;
@@ -66,6 +67,28 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
             }
 
             return result;
+        }
+
+        public async Task<DefaultResult> Handle(ChangeOrderStatusCommand command, CancellationToken cancellationToken)
+        {
+            var result = new DefaultResult();
+            var order = await _orderRepository.FindAsync(x => x.Id == command.Id);
+
+            if (order == null)
+            {
+                return result;
+            }
+
+            order.ChangeOrderStatus(command.Status);
+            _orderRepository.Modify(order);
+            
+            if (!await CommitAsync())
+            {
+                return null;
+            }
+
+            return result;
+            
         }
     }
 }

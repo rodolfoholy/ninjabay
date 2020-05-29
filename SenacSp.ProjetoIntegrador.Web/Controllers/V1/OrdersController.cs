@@ -42,7 +42,7 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetOrderByid(Guid id) => CreateResponse(
             await _mediator.Send(new GetOrderByIdQuery {Id = id, SessionUser = _sessionUser}, CancellationToken.None));
-
+    
         [HttpGet]
         public async Task<IActionResult> GetAllOrders([FromQuery] OrderFilter filter)
         {
@@ -51,6 +51,12 @@ namespace SenacSp.ProjetoIntegrador.Web.Controllers.V1
                     new PagedOrderListQuery {SessionUser = _sessionUser, Filter = filter}, CancellationToken.None))
                 : CreateResponse(await _mediator.Send(
                     new PagedAllOrdersListQuery {SessionUser = _sessionUser, Filter = filter}, CancellationToken.None));
+        }
+        [HttpPut("{id:guid}/status")]
+        public async Task<IActionResult> ChangeOrderStatus(Guid id,[FromBody] ChangeOrderStatusCommand command )
+        {
+            command.Id = id;
+            return CreateResponse(await _mediator.Send(command, CancellationToken.None));
         }
     }
 }

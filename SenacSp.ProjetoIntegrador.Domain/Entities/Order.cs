@@ -39,6 +39,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
             PaymentStatus = EPaymentStatus.WaitingApproval,
             PaymentMethod = paymentMethod,
         };
-        
+
+        public void ChangeOrderStatus(EPaymentStatus status) => PaymentStatus = status;
     }
 }

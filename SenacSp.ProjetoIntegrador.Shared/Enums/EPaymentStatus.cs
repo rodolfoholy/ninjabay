@@ -7,6 +7,9 @@ namespace SenacSp.ProjetoIntegrador.Shared.Enums
        
         [Description("Aguardando Aprovação")] WaitingApproval,
         [Description("Aprovado")]Approved,
-        [Description("Desaprovado")]Unapproved
+        [Description("Desaprovado")]Unapproved,
+        [Description("Aguardando retirada")]WaitingwWithdrawal,
+        [Description("Em transito")]InTransit,
+        [Description("Entregue")]Delivered,
     }
 }
