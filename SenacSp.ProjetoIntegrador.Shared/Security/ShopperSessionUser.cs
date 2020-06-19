@@ -11,7 +11,7 @@ namespace SenacSp.ProjetoIntegrador.Shared.Security
     {
         public Address AddressInformation { get; set; }
 
-        public Guid AddressId { get; set; }
+        public Guid? AddressId { get; set; }
         public Identification Identification { get; set; }
 
         public static ShopperSessionUser UserShopper(IEnumerable<Claim> claims)
@@ -26,9 +26,9 @@ namespace SenacSp.ProjetoIntegrador.Shared.Security
         public override ClaimsPrincipal ClaimsPrincipal()
         {
             var claims = Claims();
-            claims.Add(new Claim(CustomClaims.Address, AddressInformation.Complement ?? ""));
+            claims.Add(new Claim(CustomClaims.Address, AddressInformation?.Complement ?? ""));
             claims.Add(new Claim(CustomClaims.Identification, Identification?.Formatted ?? ""));
-            claims.Add(new Claim(CustomClaims.AddressId, AddressId != Guid.Empty ? AddressId.ToString() : ""));
+            claims.Add(new Claim(CustomClaims.AddressId, AddressId != Guid.Empty || AddressId != null ? AddressId.ToString() : ""));
             return new ClaimsPrincipal(new[] {new ClaimsIdentity(claims)});
         }
     }

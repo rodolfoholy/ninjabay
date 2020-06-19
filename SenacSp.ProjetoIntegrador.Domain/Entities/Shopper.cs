@@ -13,7 +13,7 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
         public ICollection<ShopperAddress> Addresses { get; private set; } = new List<ShopperAddress>();
         
 
-        public static Shopper New(User user, Identification cpf, Address address) => new Shopper
+        public static Shopper New(User user, Identification cpf) => new Shopper
         {
             User = user,
             Cpf = cpf,

@@ -20,20 +20,24 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
         private readonly IUserRepository _userRepository;
         private readonly IShopperRepository _shopperRepository;
         private readonly IPasswordHasherService _passwordHasherService;
+        private readonly IShopperAddressRepository _shopperAddressRepository;
+
 
         public ShopperCommandHandler(IUnitOfWork uow, IDomainNotification notifications, IUserRepository userRepository,
-            IPasswordHasherService passwordHasherService, IShopperRepository shopperRepository) : base(uow,
+            IPasswordHasherService passwordHasherService, IShopperRepository shopperRepository,
+            IShopperAddressRepository shopperAddressRepository) : base(uow,
             notifications)
         {
             _userRepository = userRepository;
             _passwordHasherService = passwordHasherService;
             _shopperRepository = shopperRepository;
+            _shopperAddressRepository = shopperAddressRepository;
         }
 
         public async Task<SaveShopperResult> Handle(CreateShopperCommand command, CancellationToken cancellationToken)
         {
             var result = new SaveShopperResult();
-            
+
             if (await _userRepository.AnyAsync(x => x.Email.ToLower() == command.Email.ToLower()))
             {
                 Notifications.Handle("E-mail em uso");
@@ -49,24 +53,34 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
                 return null;
             }
 
-            var user = User.New(command.Email,_passwordHasherService.Hash(command.Password),command.Name,EUserType.Shopper);
+            var user = User.New(command.Email, _passwordHasherService.Hash(command.Password), command.Name,
+                EUserType.Shopper);
+            command.Cpf.Type = EIdentiticationType.Cpf;
+            var shopper = Shopper.New(user, command.Cpf);
 
-            var shopper = Shopper.New(user, command.Cpf, command.Address);
-            result.Id = shopper.Id;
             await _shopperRepository.AddAsync(shopper);
 
             if (!await CommitAsync())
             {
                 return null;
             }
-            
+
+            await _shopperAddressRepository.AddAsync(ShopperAddress.New(shopper.Id, EAddressType.Home, command.Address,
+                "registro"));
+
+            if (!await CommitAsync())
+            {
+                return null;
+            }
+
+            result.Id = shopper.Id;
             return result;
         }
 
         public async Task<SaveShopperResult> Handle(UpdateShopperCommand command, CancellationToken cancellationToken)
         {
             var result = new SaveShopperResult();
-                
+
             var include = new IncludeHelper<Shopper>().Include(x => x.User).Includes;
             var shopper = await _shopperRepository.FindAsync(x => x.Id == command.SessionUser.Id, include);
 
@@ -75,23 +89,23 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
                 Notifications.Handle("Usuario não é um comprador");
                 return null;
             }
-            
+
             shopper.Update(command.Name);
 
             if (!string.IsNullOrEmpty(command.Password))
             {
                 shopper.User.UpdatePass(_passwordHasherService.Hash(command.Password));
             }
-            
+
             result.Id = shopper.Id;
-            
+
             _shopperRepository.Modify(shopper);
-            
+
             if (!await CommitAsync())
             {
                 return null;
             }
-            
+
             return result;
         }
     }

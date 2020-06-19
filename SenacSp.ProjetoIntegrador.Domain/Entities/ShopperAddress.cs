@@ -29,7 +29,13 @@ namespace SenacSp.ProjetoIntegrador.Domain.Entities
             Address = address,
             Type = type
         };
-
+        public static ShopperAddress New(EAddressType type, Address address, string name) => new ShopperAddress
+        {
+            Id = Guid.NewGuid(),
+            Name = name,
+            Address = address,
+            Type = type
+        };
         public void Update(EAddressType? type = null, Address address= null, string name= null)
         {
             Name = name ?? Name;

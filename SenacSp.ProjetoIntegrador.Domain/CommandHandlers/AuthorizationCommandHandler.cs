@@ -96,9 +96,9 @@ namespace SenacSp.ProjetoIntegrador.Domain.CommandHandlers
                 Email = shopper.User.Email,
                 Name = shopper.User.Nome,
                 UserType = shopper.User.Type.ToString(),
-                AddressInformation = shopper.Addresses.First().Address,
+                AddressInformation = shopper.Addresses!.Any() ? shopper?.Addresses?.First()?.Address : null,
                 Identification = shopper.Cpf,
-                AddressId = shopper.Addresses.FirstOrDefault().Id
+                AddressId = shopper.Addresses!.Any() ? shopper.Addresses?.FirstOrDefault()?.Id : null
             };
         
             authResult.UserInfo = sessionUser;
