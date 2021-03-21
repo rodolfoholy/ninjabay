@@ -1,11 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using NinjaBay.Domain.Contracts.Services;
 using NinjaBay.Domain.Entities;
+using NinjaBay.Shared.Enums;
 
 namespace NinjaBay.Data.Maps
 {
     internal class UserMap : IEntityTypeConfiguration<User>
     {
+        private readonly IPasswordHasherService _passwordHasherService;
+
+        public UserMap(IPasswordHasherService passwordHasherService)
+        {
+            _passwordHasherService = passwordHasherService;
+        }
+
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("users");

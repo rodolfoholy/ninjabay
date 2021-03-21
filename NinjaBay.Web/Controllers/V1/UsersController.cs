@@ -23,8 +23,7 @@ namespace NinjaBay.Web.Controllers.V1
         {
             _mediator = mediator;
         }
-
-        [Authorize]
+        
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command)
         {
