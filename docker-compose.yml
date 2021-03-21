@@ -1,0 +1,50 @@
+version: "3.4"
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "docker"
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - D:/DockerPersist/PostegreePersist/PostgreSQL
+    networks:
+      - compose-network
+
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "jgm.joaogma@icloud.com"
+      PGADMIN_DEFAULT_PASSWORD: "123"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres
+    networks:
+      - compose-network
+
+  ninjabayweb:
+    image: ninjabayweb
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:5050
+      - ConnectionStrings__Default=User ID=postgres;Password=docker;Host=postgres;Port=5432;Database=ninja_bay;Pooling=false;
+      - AppConfig__Domain=localhost
+      - AppConfig__BaseUrl=http://localhost:5050
+      - AppConfig__RequireHttps=False
+    build:
+      context: .
+      dockerfile: NinjaBay.Web/Dockerfile
+    ports:
+      - 5050:80
+    networks:
+      - compose-network
+    depends_on:
+      - postgres
+    restart: on-failure
+
+networks:
+  compose-network:
+    driver: bridge
