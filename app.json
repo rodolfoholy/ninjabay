@@ -1,0 +1,12 @@
+{
+  "name": "NinjaBayApi",
+  "description": "NinjaBayApi",
+  "repository": "https://github.com/QANinjaAcademy/ninjabay",
+  "keywords": ["aspnet", "core"],
+  "stack": "heroku-20",
+  "buildpacks": [
+    {
+      "url": "https://github.com/jincod/dotnetcore-buildpack"
+    }
+  ]
+}
