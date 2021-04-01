@@ -21,12 +21,6 @@ Click the button below to set up this sample app on Heroku:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/QANinjaAcademy/ninjabay)
 
-### Heroku Deploy button
-
-Click the button below to set up this sample app on Heroku:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/QANinjaAcademy/ninjabay)
-
 ## Blog posts
 
 - [Deploying ASP.NET Core on heroku](https://jincod.tumblr.com/post/152290263970/deploying-aspnet-core-on-heroku)
