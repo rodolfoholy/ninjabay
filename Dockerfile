@@ -4,6 +4,7 @@ WORKDIR /app
 ENV ASPNETCORE_Environment=Production
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+RUN heroku addons:create heroku-postgresql:hobby-dev
 WORKDIR /src
 COPY ["NinjaBay.Web/NinjaBay.Web.csproj", "NinjaBay.Web/"]
 RUN dotnet restore "NinjaBay.Web/NinjaBay.Web.csproj"
