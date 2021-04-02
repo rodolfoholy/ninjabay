@@ -15,22 +15,29 @@ namespace NinjaBay.Web.Config.Bootstrap
         {   
             
             string connectionString = null;
-            string envVar = Environment.GetEnvironmentVariable("DATABASE_URL");
-            if (string.IsNullOrEmpty(envVar)){
+//             string envVar = Environment.GetEnvironmentVariable("DATABASE_URL");
+            var envVar = Environment.GetEnvironmentVariable("PGDB_URL");
+            
+            if (string.IsNullOrEmpty(envVar))
+            {
                connectionString = configuration.GetConnectionString("Connection");
+            } 
+            else 
+            {
+                connectionString = envVar;
             }
-            else{
-               //parse database URL. Format is postgres://<username>:<password>@<host>/<dbname>
-               var uri = new Uri(envVar);
-               var username = uri.UserInfo.Split(':')[0];
-               var password = uri.UserInfo.Split(':')[1];
-               connectionString = 
-               "; Database=" + uri.AbsolutePath.Substring(1) +
-               "; Username=" + username +
-               "; Password=" + password + 
-               "; Port=" + uri.Port +
-               "; SSL Mode=Require; Trust Server Certificate=true;";
-            }
+//             else{
+//                //parse database URL. Format is postgres://<username>:<password>@<host>/<dbname>
+//                var uri = new Uri(envVar);
+//                var username = uri.UserInfo.Split(':')[0];
+//                var password = uri.UserInfo.Split(':')[1];
+//                connectionString = 
+//                "; Database=" + uri.AbsolutePath.Substring(1) +
+//                "; Username=" + username +
+//                "; Password=" + password + 
+//                "; Port=" + uri.Port +
+//                "; SSL Mode=Require; Trust Server Certificate=true;";
+//             }
 
             services.AddDbContextPool<ECommerceDataContext>(options =>
             {
