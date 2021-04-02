@@ -42,8 +42,7 @@ namespace NinjaBay.Web
                 .AppAddIoCServices(Configuration)
                 .AppAddDatabase(Configuration)
                 .AppAddApiDocs()
-                .AppAddMediator()
-                .AddEnvironmentVariables();
+                .AppAddMediator();
         }
 
         public void Configure(IApplicationBuilder app,
