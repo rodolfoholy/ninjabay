@@ -20,14 +20,20 @@ namespace NinjaBay.Data
         private static DbContextOptions<ECommerceDataContext> Options(string connectionString)
         {
             var builder = new DbContextOptionsBuilder<ECommerceDataContext>();
-            builder.UseNpgsql(connectionString);
+            // builder.UseNpgsql(connectionString);
+            // Go horse cabuloso
+            Console.WriteLine(connectionString);
+            builder.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL"));
             return builder.Options;
         }
 
         public static ECommerceDataContext Instance(string connectionString)
         {
             var builder = new DbContextOptionsBuilder<ECommerceDataContext>();
-            builder.UseNpgsql(connectionString);
+            // builder.UseNpgsql(connectionString);
+            // Go horse cabuloso
+            Console.WriteLine(connectionString);
+            builder.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL"));
             return new ECommerceDataContext(builder.Options);
         }
     }
