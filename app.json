@@ -9,7 +9,7 @@
    "stack":"heroku-20",
    "buildpacks":[
       {
-         "url":"https://github.com/heroku/dotnet-buildpack"
+         "url":"https://github.com/jincod/dotnetcore-buildpack"
       }
    ],
    "addons":[
