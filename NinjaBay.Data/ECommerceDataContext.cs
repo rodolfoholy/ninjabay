@@ -1,6 +1,8 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using NinjaBay.Data.Maps;
+using Microsoft.Extensions.Configuration;
+
 
 namespace NinjaBay.Data
 {
