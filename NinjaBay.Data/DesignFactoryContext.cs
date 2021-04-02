@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -19,7 +19,7 @@ namespace NinjaBay.Data
 
             var builder = new DbContextOptionsBuilder<ECommerceDataContext>();
 //             var connectionString = configuration.GetConnectionString("Connection");
-            var connectionString = System.getenv("DATABASE_URL");
+            var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
             builder.UseNpgsql(connectionString);
             return new ECommerceDataContext(builder.Options);
         }
