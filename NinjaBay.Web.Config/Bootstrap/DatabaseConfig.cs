@@ -12,22 +12,10 @@ namespace NinjaBay.Web.Config.Bootstrap
     {
         public static IServiceCollection AppAddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            
-            var uri = new Uri(Environment.GetEnvironmentVariable("DATABASE_URL"));
-            var username = uri.UserInfo.Split(':')[0];
-            var password = uri.UserInfo.Split(':')[1];
-            string connectionString = 
-               "; Database=" + uri.AbsolutePath.Substring(1) +
-               "; Username=" + username +
-               "; Password=" + password + 
-               "; Port=" + uri.Port +
-               "; SSL Mode=Require; Trust Server Certificate=true;";
-            
-            
             services.AddDbContextPool<ECommerceDataContext>(options =>
             {
-                options.UseNpgsql(connectionString);
-                // options.UseNpgsql(configuration.GetConnectionString("Connection"));
+                options.UseNpgsql(Environment.GetEnvironmentVariable("PG_DB"));
+                //options.UseNpgsql(configuration.GetConnectionString("Connection"));
                 options.EnableSensitiveDataLogging();
             });
 
