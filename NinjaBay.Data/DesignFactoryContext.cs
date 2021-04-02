@@ -18,7 +18,8 @@ namespace NinjaBay.Data
                 .Build();
 
             var builder = new DbContextOptionsBuilder<ECommerceDataContext>();
-            var connectionString = configuration.GetConnectionString("Connection");
+//             var connectionString = configuration.GetConnectionString("Connection");
+            var connectionString = System.getenv("DATABASE_URL");
             builder.UseNpgsql(connectionString);
             return new ECommerceDataContext(builder.Options);
         }
