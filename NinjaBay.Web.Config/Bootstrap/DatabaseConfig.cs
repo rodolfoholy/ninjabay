@@ -14,8 +14,7 @@ namespace NinjaBay.Web.Config.Bootstrap
         {
             services.AddDbContextPool<ECommerceDataContext>(options =>
             {
-                options.UseNpgsql(Environment.GetEnvironmentVariable("PG_DB"));
-                //options.UseNpgsql(configuration.GetConnectionString("Connection"));
+                options.UseNpgsql(configuration.GetConnectionString("Connection"));
                 options.EnableSensitiveDataLogging();
             });
 
