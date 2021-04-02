@@ -17,7 +17,7 @@ namespace NinjaBay.Web.Config.Bootstrap
             string connectionString = null;
             string envVar = Environment.GetEnvironmentVariable("DATABASE_URL");
             if (string.IsNullOrEmpty(envVar)){
-               connectionString = Configuration["Connectionstrings:database"];
+               connectionString = configuration.GetConnectionString("Connection");
             }
             else{
                //parse database URL. Format is postgres://<username>:<password>@<host>/<dbname>
